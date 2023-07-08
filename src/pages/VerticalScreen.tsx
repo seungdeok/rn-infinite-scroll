@@ -1,12 +1,13 @@
-import React from 'react';
-import {SafeAreaView, ScrollView, Text} from 'react-native';
+import React, {Suspense} from 'react';
+import {SafeAreaView, Text} from 'react-native';
+import {VerticalList} from '../components/VerticalList';
 
 export function VerticalScreen() {
   return (
     <SafeAreaView>
-      <ScrollView>
-        <Text>VerticalScreen</Text>
-      </ScrollView>
+      <Suspense fallback={<Text>loading...</Text>}>
+        <VerticalList />
+      </Suspense>
     </SafeAreaView>
   );
 }
