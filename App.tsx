@@ -6,72 +6,34 @@
  */
 
 import React from 'react';
-import {SafeAreaView, ScrollView, Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {VerticalScreen} from './src/pages/VerticalScreen';
+import {HorizontalScreen} from './src/pages/HorizontalScreen';
+import {SafeAreaView} from 'react-native';
 
-function HomeScreen() {
-  return (
-    <SafeAreaView>
-      <ScrollView>
-        <Text>HomeScreen</Text>
-      </ScrollView>
-    </SafeAreaView>
-  );
+export interface ParamList {
+  Horizontal: undefined;
+  Vertical: undefined;
 }
 
-function StationScreen() {
-  return (
-    <SafeAreaView>
-      <ScrollView>
-        <Text>HomeScreen</Text>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
-function StoreScreen() {
-  return (
-    <SafeAreaView>
-      <ScrollView>
-        <Text>HomeScreen</Text>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
-function MyPageScreen() {
-  return (
-    <SafeAreaView>
-      <ScrollView>
-        <Text>HomeScreen</Text>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
-function MenuScreen() {
-  return (
-    <SafeAreaView>
-      <ScrollView>
-        <Text>HomeScreen</Text>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
-const Stack = createNativeStackNavigator();
+const Tabs = createBottomTabNavigator();
 
 function App(): JSX.Element {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Store" component={StoreScreen} />
-        <Stack.Screen name="Station" component={StationScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="MyPage" component={MyPageScreen} />
-        <Stack.Screen name="Menu" component={MenuScreen} />
-      </Stack.Navigator>
+      <Tabs.Navigator initialRouteName="Home">
+        <Tabs.Screen
+          name="Vertical"
+          component={VerticalScreen}
+          options={{title: '목록'}}
+        />
+        <Tabs.Screen
+          name="Horizontal"
+          component={HorizontalScreen}
+          options={{title: '배너'}}
+        />
+      </Tabs.Navigator>
     </NavigationContainer>
   );
 }
