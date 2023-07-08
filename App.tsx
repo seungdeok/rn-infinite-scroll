@@ -8,9 +8,9 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {QueryClientProvider, QueryClient} from '@tanstack/react-query';
 import {VerticalScreen} from './src/pages/VerticalScreen';
 import {HorizontalScreen} from './src/pages/HorizontalScreen';
-import {SafeAreaView} from 'react-native';
 
 export interface ParamList {
   Horizontal: undefined;
@@ -18,23 +18,28 @@ export interface ParamList {
 }
 
 const Tabs = createBottomTabNavigator();
+const queryClient = new QueryClient({
+  defaultOptions: {queries: {retry: 2}},
+});
 
 function App(): JSX.Element {
   return (
-    <NavigationContainer>
-      <Tabs.Navigator initialRouteName="Home">
-        <Tabs.Screen
-          name="Vertical"
-          component={VerticalScreen}
-          options={{title: '목록'}}
-        />
-        <Tabs.Screen
-          name="Horizontal"
-          component={HorizontalScreen}
-          options={{title: '배너'}}
-        />
-      </Tabs.Navigator>
-    </NavigationContainer>
+    <QueryClientProvider client={queryClient}>
+      <NavigationContainer>
+        <Tabs.Navigator initialRouteName="Home">
+          <Tabs.Screen
+            name="Vertical"
+            component={VerticalScreen}
+            options={{title: '목록'}}
+          />
+          <Tabs.Screen
+            name="Horizontal"
+            component={HorizontalScreen}
+            options={{title: '배너'}}
+          />
+        </Tabs.Navigator>
+      </NavigationContainer>
+    </QueryClientProvider>
   );
 }
 
