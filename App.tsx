@@ -6,33 +6,15 @@
  */
 
 import React from 'react';
-import {SafeAreaView, ScrollView, Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {VerticalScreen} from './src/pages/VerticalScreen';
+import {HorizontalScreen} from './src/pages/HorizontalScreen';
+import {SafeAreaView} from 'react-native';
 
 export interface ParamList {
   Horizontal: undefined;
   Vertical: undefined;
-}
-
-function HorizontalScreen() {
-  return (
-    <SafeAreaView>
-      <ScrollView>
-        <Text>HorizontalScreen</Text>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
-function VerticalScreen() {
-  return (
-    <SafeAreaView>
-      <ScrollView>
-        <Text>VerticalScreen</Text>
-      </ScrollView>
-    </SafeAreaView>
-  );
 }
 
 const Tabs = createBottomTabNavigator();
