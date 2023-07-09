@@ -1,11 +1,12 @@
 import React, {Suspense} from 'react';
-import {SafeAreaView, Text} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import {HorizontalList} from '../components/HorizontalList';
+import {LoadingView} from '../components/LoadingView';
 
 export function HorizontalScreen() {
   return (
     <SafeAreaView>
-      <Suspense fallback={<Text>loading...</Text>}>
+      <Suspense fallback={<LoadingView />}>
         <HorizontalList />
       </Suspense>
     </SafeAreaView>

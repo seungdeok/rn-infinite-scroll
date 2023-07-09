@@ -1,11 +1,12 @@
 import React, {Suspense} from 'react';
-import {SafeAreaView, Text} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import {VerticalList} from '../components/VerticalList';
+import {LoadingView} from '../components/LoadingView';
 
 export function VerticalScreen() {
   return (
     <SafeAreaView>
-      <Suspense fallback={<Text>loading...</Text>}>
+      <Suspense fallback={<LoadingView />}>
         <VerticalList />
       </Suspense>
     </SafeAreaView>
