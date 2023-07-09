@@ -1,8 +1,12 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {ActivityIndicator, StyleSheet, View} from 'react-native';
 
 export function VerticalFooter() {
-  return <View style={styles.footerWrap} />;
+  return (
+    <View style={styles.footerWrap}>
+      <ActivityIndicator />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
