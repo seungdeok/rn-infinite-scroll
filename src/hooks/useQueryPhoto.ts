@@ -1,32 +1,19 @@
-import {useInfiniteQuery, InfiniteData} from '@tanstack/react-query';
-import {photoAPI} from '../api/photoAPI';
+import {useQuery} from '@tanstack/react-query';
 import {IPhoto} from '../types/IPhoto';
+import {photoAPI} from '../api/photoAPI';
 
-type IReturnType = {
-  data: InfiniteData<IPhoto[]> | undefined;
-  loadMore: () => void;
-};
+interface IReturnType {
+  data: IPhoto[] | undefined;
+}
 
 export function useQueryPhoto(): IReturnType {
-  const {data, hasNextPage, fetchNextPage} = useInfiniteQuery<IPhoto[]>(
-    ['photos'],
+  const {data} = useQuery<IPhoto[]>(
+    ['photo'],
     ({pageParam}) => photoAPI.get(pageParam) as Promise<IPhoto[]>,
     {
       suspense: true,
-      getNextPageParam: (lastPage, allPages) => {
-        return allPages.length + 1;
-      },
     },
   );
 
-  function loadMore() {
-    if (hasNextPage) {
-      fetchNextPage();
-    }
-  }
-
-  return {
-    data,
-    loadMore,
-  };
+  return {data};
 }

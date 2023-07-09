@@ -2,10 +2,10 @@ import React from 'react';
 import {FlatList, StyleSheet} from 'react-native';
 import {VerticalItem} from '../components/VerticalItem';
 import {VerticalFooter} from '../components/VerticalFooter';
-import {useQueryPhoto} from '../hooks/useQueryPhoto';
+import {useInfiniteQueryPhoto} from '../hooks/useInfiniteQueryPhoto';
 
 export function VerticalList() {
-  const {data, loadMore} = useQueryPhoto();
+  const {data, loadMore} = useInfiniteQueryPhoto();
 
   return (
     <FlatList
