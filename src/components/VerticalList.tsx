@@ -9,6 +9,7 @@ export function VerticalList() {
 
   return (
     <FlatList
+      testID="verticalList"
       style={styles.listWrap}
       renderItem={VerticalItem}
       ListFooterComponent={VerticalFooter}

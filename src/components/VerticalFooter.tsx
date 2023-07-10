@@ -3,7 +3,7 @@ import {ActivityIndicator, StyleSheet, View} from 'react-native';
 
 export function VerticalFooter() {
   return (
-    <View style={styles.footerWrap}>
+    <View testID="loadingIndicator" style={styles.footerWrap}>
       <ActivityIndicator />
     </View>
   );
