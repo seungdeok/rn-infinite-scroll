@@ -7,7 +7,7 @@ export const SPACING_HORIZONTAL = 16;
 
 export function HorizontalItem({item}: {item: IPhoto}) {
   return (
-    <View key={item.id} style={styles.itemWrap}>
+    <View testID={`banner${item.id}`} key={item.id} style={styles.itemWrap}>
       <Image source={{uri: item.thumbnailUrl}} style={styles.image} />
       <Text style={styles.text} numberOfLines={1} ellipsizeMode="tail">
         {item.title}

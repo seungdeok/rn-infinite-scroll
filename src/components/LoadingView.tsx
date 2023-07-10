@@ -4,7 +4,7 @@ import {StyleSheet, View} from 'react-native';
 
 export function LoadingView() {
   return (
-    <View style={styles.lottieWrap}>
+    <View style={styles.lottieWrap} testID="loadingView">
       <LottieView
         style={styles.lottie}
         source={require('../assets/Lottie.json')}

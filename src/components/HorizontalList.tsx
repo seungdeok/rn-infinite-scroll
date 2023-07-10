@@ -36,6 +36,7 @@ export function HorizontalList() {
   return (
     <View style={styles.listContainer}>
       <FlatList
+        testID="horizontalList"
         ref={flatListRef}
         data={data}
         horizontal
