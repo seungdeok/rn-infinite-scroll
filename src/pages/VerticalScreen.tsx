@@ -1,18 +1,17 @@
 import React, {Suspense} from 'react';
-import {SafeAreaView, Text} from 'react-native';
 import {VerticalList} from '../components/VerticalList';
 import {LoadingView} from '../components/LoadingView';
 import {ErrorBoundary} from '../components/ErrorBoundary';
+import {Layout} from '../components/Layout';
 
 export function VerticalScreen() {
   return (
-    <SafeAreaView>
-      <Text>VerticalScreen</Text>
+    <Layout title="VerticalScreen">
       <ErrorBoundary>
         <Suspense fallback={<LoadingView />}>
           <VerticalList />
         </Suspense>
       </ErrorBoundary>
-    </SafeAreaView>
+    </Layout>
   );
 }

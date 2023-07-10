@@ -1,18 +1,17 @@
 import React, {Suspense} from 'react';
-import {SafeAreaView, Text} from 'react-native';
 import {HorizontalList} from '../components/HorizontalList';
 import {LoadingView} from '../components/LoadingView';
 import {ErrorBoundary} from '../components/ErrorBoundary';
+import {Layout} from '../components/Layout';
 
 export function HorizontalScreen() {
   return (
-    <SafeAreaView>
-      <Text>HorizontalScreen</Text>
+    <Layout title="HorizontalScreen">
       <ErrorBoundary>
         <Suspense fallback={<LoadingView />}>
           <HorizontalList />
         </Suspense>
       </ErrorBoundary>
-    </SafeAreaView>
+    </Layout>
   );
 }

@@ -13,6 +13,7 @@ export function VerticalList() {
       style={styles.listWrap}
       renderItem={VerticalItem}
       ListFooterComponent={VerticalFooter}
+      keyExtractor={(item, _) => String(item.id)}
       onEndReached={loadMore}
       onEndReachedThreshold={0.75}
       data={data?.pages.flat()}
@@ -22,7 +23,6 @@ export function VerticalList() {
 
 const styles = StyleSheet.create({
   listWrap: {
-    paddingTop: 16,
     paddingLeft: 16,
     paddingRight: 16,
   },

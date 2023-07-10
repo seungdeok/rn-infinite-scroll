@@ -1,5 +1,12 @@
 import React, {useEffect, useMemo, useRef, useState} from 'react';
-import {Dimensions, FlatList, StyleSheet, View} from 'react-native';
+import {
+  Dimensions,
+  FlatList,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  StyleSheet,
+  View,
+} from 'react-native';
 import {HorizontalItem, SPACING_HORIZONTAL} from './HorizontalItem';
 import {useInterval} from '../hooks/useInterval';
 import {useQueryPhoto} from '../hooks/useQueryPhoto';
@@ -19,6 +26,14 @@ export function HorizontalList() {
       ),
     [data],
   );
+
+  function handleScrollEnd(e: NativeSyntheticEvent<NativeScrollEvent>) {
+    setCurrentIndex(
+      Math.floor(
+        e.nativeEvent.contentOffset.x / (windowWidth - SPACING_HORIZONTAL * 2),
+      ),
+    );
+  }
 
   useEffect(() => {
     if (currentIndex !== snapToOffsets.length) {
@@ -45,14 +60,7 @@ export function HorizontalList() {
         showsHorizontalScrollIndicator={false}
         pagingEnabled
         keyExtractor={(item, _) => String(item.id)}
-        onMomentumScrollEnd={e => {
-          setCurrentIndex(
-            Math.floor(
-              e.nativeEvent.contentOffset.x /
-                (windowWidth - SPACING_HORIZONTAL * 2),
-            ),
-          );
-        }}
+        onMomentumScrollEnd={handleScrollEnd}
       />
     </View>
   );
@@ -61,6 +69,5 @@ export function HorizontalList() {
 const styles = StyleSheet.create({
   listContainer: {
     width: windowWidth,
-    paddingTop: 16,
   },
 });
