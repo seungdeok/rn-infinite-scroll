@@ -1,11 +1,16 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import {IPhoto} from '../types/IPhoto';
 
 export function VerticalItem({item}: {item: IPhoto}) {
   return (
     <View testID={`card${item.id}`} style={styles.itemWrap}>
-      <Image source={{uri: item.thumbnailUrl}} style={styles.image} />
+      <FastImage
+        style={styles.image}
+        source={{uri: item.thumbnailUrl}}
+        resizeMode={FastImage.resizeMode.contain}
+      />
       <Text style={styles.text} numberOfLines={1} ellipsizeMode="tail">
         {item.title}
       </Text>
