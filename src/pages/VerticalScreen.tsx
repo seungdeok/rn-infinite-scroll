@@ -4,11 +4,10 @@ import {VerticalList} from '../components/VerticalList';
 import {LoadingView} from '../components/LoadingView';
 import {ErrorBoundary} from '../components/ErrorBoundary';
 import {useBackButton} from '../hooks/useBackButton';
-import {useNetworkInfo} from '../hooks/useNetworkInfo';
 
 export function VerticalScreen() {
   useBackButton();
-  useNetworkInfo();
+
   return (
     <SafeAreaView>
       <Text>VerticalScreen</Text>

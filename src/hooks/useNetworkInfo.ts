@@ -1,14 +1,16 @@
 import {useEffect} from 'react';
-import NetInfo from '@react-native-community/netinfo';
+import * as NetInfo from '@react-native-community/netinfo';
 import {notify} from '../utils/notify';
 
 export function useNetworkInfo() {
   useEffect(() => {
-    const unsubscribe = NetInfo.addEventListener(state => {
+    function networkHandler(state: NetInfo.NetInfoState) {
       if (state.isConnected !== true) {
         notify('인터넷 연결이 불안합니다');
       }
-    });
+    }
+
+    const unsubscribe = NetInfo.addEventListener(networkHandler);
 
     return () => {
       unsubscribe();
