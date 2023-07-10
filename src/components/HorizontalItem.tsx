@@ -1,5 +1,6 @@
 import React from 'react';
-import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
+import {Dimensions, StyleSheet, Text, View} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import {IPhoto} from '../types/IPhoto';
 
 const {width: windowWidth} = Dimensions.get('window');
@@ -8,7 +9,11 @@ export const SPACING_HORIZONTAL = 16;
 export function HorizontalItem({item}: {item: IPhoto}) {
   return (
     <View testID={`banner${item.id}`} key={item.id} style={styles.itemWrap}>
-      <Image source={{uri: item.thumbnailUrl}} style={styles.image} />
+      <FastImage
+        style={styles.image}
+        source={{uri: item.thumbnailUrl}}
+        resizeMode={FastImage.resizeMode.contain}
+      />
       <Text style={styles.text} numberOfLines={1} ellipsizeMode="tail">
         {item.title}
       </Text>
