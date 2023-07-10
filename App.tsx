@@ -26,7 +26,9 @@ function App(): JSX.Element {
   return (
     <QueryClientProvider client={queryClient}>
       <NavigationContainer>
-        <Tabs.Navigator initialRouteName="Home">
+        <Tabs.Navigator
+          initialRouteName="Vertical"
+          screenOptions={{headerShown: false}}>
           <Tabs.Screen
             name="Vertical"
             component={VerticalScreen}

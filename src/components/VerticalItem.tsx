@@ -4,7 +4,7 @@ import {IPhoto} from '../types/IPhoto';
 
 export function VerticalItem({item}: {item: IPhoto}) {
   return (
-    <View style={styles.itemWrap}>
+    <View testID={`card${item.id}`} style={styles.itemWrap}>
       <Image source={{uri: item.thumbnailUrl}} style={styles.image} />
       <Text style={styles.text} numberOfLines={1} ellipsizeMode="tail">
         {item.title}
