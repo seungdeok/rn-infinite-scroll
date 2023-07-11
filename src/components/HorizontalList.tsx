@@ -9,19 +9,21 @@ import {
 } from 'react-native';
 import {HorizontalItem, SPACING_HORIZONTAL} from './HorizontalItem';
 import {useInterval} from '../hooks/useInterval';
-import {useQueryPhoto} from '../hooks/useQueryPhoto';
+import {useInfiniteQueryPhoto} from '../hooks/useInfiniteQueryPhoto';
+import {LoadingOverlay} from './LoadingOverlay';
 
 export const INTERVAL_TIME = 5000;
 const {width: windowWidth} = Dimensions.get('window');
 
 export function HorizontalList() {
-  const {data} = useQueryPhoto();
+  const {data, loadMore, isFetchingNextPage} =
+    useInfiniteQueryPhoto('horizontal');
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
 
   const snapToOffsets = useMemo(
     () =>
-      Array.from(Array(data?.flat().length)).map(
+      Array.from(Array(data?.pages.flat().length)).map(
         (_, index) => index * windowWidth,
       ),
     [data],
@@ -45,29 +47,38 @@ export function HorizontalList() {
   }, [currentIndex, snapToOffsets]);
 
   useInterval(() => {
-    setCurrentIndex(prev => (prev === snapToOffsets.length - 1 ? 0 : prev + 1));
+    setCurrentIndex(prev =>
+      prev < snapToOffsets.length - 1 ? prev + 1 : prev,
+    );
   }, INTERVAL_TIME);
 
   return (
-    <View style={styles.listContainer}>
+    <View style={styles.container}>
+      <LoadingOverlay loading={isFetchingNextPage} />
       <FlatList
+        style={styles.listWrap}
         testID="horizontalList"
         ref={flatListRef}
-        data={data}
+        data={data?.pages.flat()}
         horizontal
         renderItem={HorizontalItem}
         snapToOffsets={snapToOffsets}
         showsHorizontalScrollIndicator={false}
         pagingEnabled
-        keyExtractor={(item, _) => String(item.id)}
+        onEndReached={loadMore}
         onMomentumScrollEnd={handleScrollEnd}
+        keyExtractor={(item, _) => String(item.id)}
+        onEndReachedThreshold={0.75}
       />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  listContainer: {
+  container: {
+    position: 'relative',
+  },
+  listWrap: {
     width: windowWidth,
   },
 });

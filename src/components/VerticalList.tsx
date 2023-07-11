@@ -1,29 +1,37 @@
 import React from 'react';
-import {FlatList, StyleSheet} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
+import {LoadingOverlay} from './LoadingOverlay';
 import {VerticalItem} from '../components/VerticalItem';
-import {VerticalFooter} from '../components/VerticalFooter';
 import {useInfiniteQueryPhoto} from '../hooks/useInfiniteQueryPhoto';
 
 export function VerticalList() {
-  const {data, loadMore} = useInfiniteQueryPhoto();
+  const {data, loadMore, isFetchingNextPage} =
+    useInfiniteQueryPhoto('vertical');
 
   return (
-    <FlatList
-      testID="verticalList"
-      style={styles.listWrap}
-      renderItem={VerticalItem}
-      ListFooterComponent={VerticalFooter}
-      keyExtractor={(item, _) => String(item.id)}
-      onEndReached={loadMore}
-      onEndReachedThreshold={0.75}
-      data={data?.pages.flat()}
-    />
+    <View style={styles.container}>
+      <LoadingOverlay loading={isFetchingNextPage} />
+      <FlatList
+        testID="verticalList"
+        contentContainerStyle={styles.listWrap}
+        renderItem={VerticalItem}
+        onEndReached={loadMore}
+        data={data?.pages.flat()}
+        keyExtractor={(item, _) => String(item.id)}
+        onEndReachedThreshold={0.75}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    position: 'relative',
+    paddingBottom: 48,
+  },
   listWrap: {
     paddingLeft: 16,
     paddingRight: 16,
+    paddingBottom: 48,
   },
 });
