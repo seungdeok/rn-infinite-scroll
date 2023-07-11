@@ -5,7 +5,7 @@ import {VerticalFooter} from '../components/VerticalFooter';
 import {useInfiniteQueryPhoto} from '../hooks/useInfiniteQueryPhoto';
 
 export function VerticalList() {
-  const {data, loadMore} = useInfiniteQueryPhoto();
+  const {data, loadMore} = useInfiniteQueryPhoto('vertical');
 
   return (
     <FlatList

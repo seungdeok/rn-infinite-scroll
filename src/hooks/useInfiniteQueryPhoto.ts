@@ -7,9 +7,9 @@ interface IReturnType {
   loadMore: () => void;
 }
 
-export function useInfiniteQueryPhoto(): IReturnType {
+export function useInfiniteQueryPhoto(queryKey: string): IReturnType {
   const {data, hasNextPage, fetchNextPage} = useInfiniteQuery<IPhoto[]>(
-    ['photos'],
+    ['photos', queryKey],
     ({pageParam}) => photoAPI.get(pageParam) as Promise<IPhoto[]>,
     {
       suspense: true,
