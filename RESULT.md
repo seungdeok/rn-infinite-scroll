@@ -11,7 +11,7 @@
 
 ## 프로젝트 구성
 
-![rn-redux](https://github.com/seungdeok/rn-infinite-scroll/assets/32917014/d4067f6d-843c-4dc6-ad96-7da63b3302dd)
+<img alt="architecture" src="https://github.com/seungdeok/rn-infinite-scroll/assets/32917014/d4067f6d-843c-4dc6-ad96-7da63b3302dd" width="800" height="600"/>
 
 <br />
 
@@ -29,10 +29,10 @@
 75%가 노출되면 다음 페이지 로딩을 시작하여 사용자의 로딩 체감시간을 최소화하였습니다.
 
 - 가로
-  ![infinitescroll-horizontal](https://github.com/seungdeok/rn-infinite-scroll/assets/32917014/2053c4e1-54ee-4dd6-aad6-2fad33a4f673)
+  <img alt="infinitescroll" src="https://github.com/seungdeok/rn-infinite-scroll/assets/32917014/22bd2edf-a831-4c97-8126-c380d98c3e66" width="240" height="480"/>
 
 - 세로
-  ![infinitescroll-vertical](https://github.com/seungdeok/rn-infinite-scroll/assets/32917014/6f4ce26c-4151-47fb-aa95-ac71f24e9d6d)
+  <img alt="infinitescroll" src="https://github.com/seungdeok/rn-infinite-scroll/assets/32917014/0db38743-384f-400e-930a-74806a2e9e55" width="240" height="480"/>
 
 <br />
 
@@ -40,7 +40,7 @@
 
 Stack 길이를 체크하여 길이가 1이며 2000ms안에 두 번의 뒤로가기 버튼을 누르면 앱이 종료된다[[링크](./src/hooks/useBackButton.ts)]
 
-![back_button](https://github.com/seungdeok/rn-infinite-scroll/assets/32917014/7eb4a0fe-4c44-4b10-a61d-58e278e56b6e)
+  <img alt="back_button" src="https://github.com/seungdeok/rn-infinite-scroll/assets/32917014/7eb4a0fe-4c44-4b10-a61d-58e278e56b6e" width="240" height="480"/>
 
 <br />
 
