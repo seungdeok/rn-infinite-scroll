@@ -84,16 +84,16 @@ describe('Horizontal Screen', () => {
     fireEvent.scroll(flatlist, {
       nativeEvent: {
         contentSize: {height: size.height, width: size.width},
-        contentOffset: {y: 0, x: size.width},
+        contentOffset: {y: 0, x: size.width * 10},
         layoutMeasurement: {height: size.height, width: size.width},
       },
     });
 
-    // 두 번째 배너 확인
-    const banner2 = await screen.findByTestId('banner2');
-    const banner2Text = banner2.children[1] as ReactTestInstance;
-    expect(banner2Text.props.children).toEqual(
-      'reprehenderit est deserunt velit ipsam',
-    );
+    expect(screen.findByTestId('loadingIndicator')).toBeTruthy();
+
+    await new Promise(_ => setTimeout(_, 2000));
+
+    // 10개 추가
+    expect(flatlist.props.data).toHaveLength(20);
   });
 });

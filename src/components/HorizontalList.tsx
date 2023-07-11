@@ -56,6 +56,7 @@ export function HorizontalList() {
     <View style={styles.container}>
       <LoadingOverlay loading={isFetchingNextPage} />
       <FlatList
+        style={styles.listWrap}
         testID="horizontalList"
         ref={flatListRef}
         data={data?.pages.flat()}
@@ -64,10 +65,10 @@ export function HorizontalList() {
         snapToOffsets={snapToOffsets}
         showsHorizontalScrollIndicator={false}
         pagingEnabled
-        keyExtractor={(item, _) => String(item.id)}
         onEndReached={loadMore}
-        onEndReachedThreshold={0.75}
         onMomentumScrollEnd={handleScrollEnd}
+        keyExtractor={(item, _) => String(item.id)}
+        onEndReachedThreshold={0.75}
       />
     </View>
   );
@@ -75,7 +76,9 @@ export function HorizontalList() {
 
 const styles = StyleSheet.create({
   container: {
-    width: windowWidth,
     position: 'relative',
+  },
+  listWrap: {
+    width: windowWidth,
   },
 });
