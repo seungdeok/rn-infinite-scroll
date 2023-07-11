@@ -5,19 +5,21 @@ import {IPhoto} from '../types/IPhoto';
 interface IReturnType {
   data: InfiniteData<IPhoto[]> | undefined;
   loadMore: () => void;
+  isFetchingNextPage: boolean;
 }
 
 export function useInfiniteQueryPhoto(queryKey: string): IReturnType {
-  const {data, hasNextPage, fetchNextPage} = useInfiniteQuery<IPhoto[]>(
-    ['photos', queryKey],
-    ({pageParam}) => photoAPI.get(pageParam) as Promise<IPhoto[]>,
-    {
-      suspense: true,
-      getNextPageParam: (lastPage, allPages) => {
-        return allPages.length + 1;
+  const {data, hasNextPage, fetchNextPage, isFetchingNextPage} =
+    useInfiniteQuery<IPhoto[]>(
+      ['photos', queryKey],
+      ({pageParam}) => photoAPI.get(pageParam) as Promise<IPhoto[]>,
+      {
+        suspense: true,
+        getNextPageParam: (lastPage, allPages) => {
+          return allPages.length + 1;
+        },
       },
-    },
-  );
+    );
 
   function loadMore() {
     if (hasNextPage) {
@@ -28,5 +30,6 @@ export function useInfiniteQueryPhoto(queryKey: string): IReturnType {
   return {
     data,
     loadMore,
+    isFetchingNextPage,
   };
 }

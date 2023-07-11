@@ -10,12 +10,14 @@ import {
 import {HorizontalItem, SPACING_HORIZONTAL} from './HorizontalItem';
 import {useInterval} from '../hooks/useInterval';
 import {useInfiniteQueryPhoto} from '../hooks/useInfiniteQueryPhoto';
+import {LoadingOverlay} from './LoadingOverlay';
 
 export const INTERVAL_TIME = 5000;
 const {width: windowWidth} = Dimensions.get('window');
 
 export function HorizontalList() {
-  const {data, loadMore} = useInfiniteQueryPhoto('horizontal');
+  const {data, loadMore, isFetchingNextPage} =
+    useInfiniteQueryPhoto('horizontal');
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
 
@@ -51,7 +53,8 @@ export function HorizontalList() {
   }, INTERVAL_TIME);
 
   return (
-    <View style={styles.listContainer}>
+    <View style={styles.container}>
+      <LoadingOverlay loading={isFetchingNextPage} />
       <FlatList
         testID="horizontalList"
         ref={flatListRef}
@@ -71,12 +74,8 @@ export function HorizontalList() {
 }
 
 const styles = StyleSheet.create({
-  listContainer: {
+  container: {
     width: windowWidth,
-  },
-  carouselItem: {
-    width: 250,
-    height: 250,
-    borderRadius: 20,
+    position: 'relative',
   },
 });
